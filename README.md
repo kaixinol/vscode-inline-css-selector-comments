@@ -58,6 +58,9 @@ without touching comments elsewhere:
 }
 ```
 
+This affects only the comments inside the string. The `/* css selector */` marker keeps
+following your theme's regular comment color, since it uses the standard `comment` scope.
+
 The color itself is never hardcoded in this extension; it always comes from your theme, so
 switching themes also switches the comment color.
 
