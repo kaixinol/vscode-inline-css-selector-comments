@@ -21,7 +21,7 @@
       "begin": "(/\\*\\s*css[ -]selector\\s*\\*/)\\s*(\")",
       "beginCaptures": {
         "1": {
-          "name": "comment.block.css"
+          "name": "comment.block.css.inline-selector"
         },
         "2": {
           "name": "punctuation.definition.string.begin.js"
@@ -48,7 +48,7 @@
       "begin": "(/\\*\\s*css[ -]selector\\s*\\*/)\\s*(')",
       "beginCaptures": {
         "1": {
-          "name": "comment.block.css"
+          "name": "comment.block.css.inline-selector"
         },
         "2": {
           "name": "punctuation.definition.string.begin.js"
@@ -75,7 +75,7 @@
       "begin": "(/\\*\\s*css[ -]selector\\s*\\*/)\\s*(`)",
       "beginCaptures": {
         "1": {
-          "name": "comment.block.css"
+          "name": "comment.block.css.inline-selector"
         },
         "2": {
           "name": "punctuation.definition.string.template.begin.js"
@@ -102,12 +102,27 @@
       "name": "constant.character.escape"
     },
     "css-body": {
-      "comment": "Stack comment.block.css onto /* */ inside the string. Deliberately avoids the full source.css / #selector-innards rules (they swallow the closing quote, leaving the string unterminated) and avoids meta.embedded (it strips the string's own color).",
+      "comment": "Match /* */ inside the string as a comment. The scope is comment.block.css.inline-selector so it nests under the standard comment scopes (themes keep coloring it like a normal comment) while still being individually overridable via tokenColorCustomizations. Deliberately avoids the full source.css / #selector-innards rules (they swallow the closing quote, leaving the string unterminated) and avoids meta.embedded (it strips the string's own color).",
       "patterns": [
         {
-          "include": "source.css#comment-block"
+          "include": "#inner-comment"
         }
       ]
+    },
+    "inner-comment": {
+      "name": "comment.block.css.inline-selector",
+      "begin": "/\\*",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.comment.begin.css"
+        }
+      },
+      "end": "\\*/",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.comment.end.css"
+        }
+      }
     }
   }
 }

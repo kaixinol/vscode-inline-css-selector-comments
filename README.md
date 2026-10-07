@@ -40,6 +40,27 @@ JavaScript / TypeScript (incl. JSX, TSX), and the `<script>` block of Vue / Svel
 - Strings without the marker are untouched.
 - Escaped quotes (`\"`) won't terminate the string early.
 
+## Configuration
+
+The comments use the scope `comment.block.css.inline-selector`, which nests under the standard
+`comment` scopes, so it is colored like any other comment by default. To color it on its own,
+without touching comments elsewhere:
+
+```jsonc
+// settings.json
+"editor.tokenColorCustomizations": {
+  "textMateRules": [
+    {
+      "scope": "comment.block.css.inline-selector",
+      "settings": { "foreground": "#C586C0" }
+    }
+  ]
+}
+```
+
+The color itself is never hardcoded in this extension; it always comes from your theme, so
+switching themes also switches the comment color.
+
 ## License
 
 [MIT](LICENSE)
