@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.1
+
+- The comments inside the string now use the dedicated scope
+  `comment.block.css.inline-selector`, so they can be recolored on their own with
+  `editor.tokenColorCustomizations`. The `/* css selector */` marker keeps following the
+  theme's regular comment color.
+
 ## 0.1.0
 
 First release.

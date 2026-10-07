@@ -2,7 +2,7 @@
   "name": "inline-css-selector-comments",
   "displayName": "Inline CSS Selector Comments",
   "description": "Highlight CSS selector comments inside JavaScript and TypeScript string literals.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publisher": "kaesinol",
   "license": "MIT",
   "engines": {
