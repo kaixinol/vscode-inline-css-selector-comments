@@ -1,0 +1,60 @@
+# Publish the extension to the VS Code Marketplace using Microsoft Entra ID.
+#
+# Azure DevOps global PATs are retired on 2026-12-01, so this workflow
+# authenticates with a federated managed identity instead of a stored secret.
+#
+# One-time setup is documented in PUBLISHING.md. In short you need:
+#   - a user-assigned managed identity in Azure
+#   - a federated credential trusting this repository's workflow
+#   - AZURE_CLIENT_ID / AZURE_TENANT_ID repository secrets
+#   - that identity added as a Contributor on the Marketplace publisher
+
+name: Publish
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry-run:
+        description: Package only, do not publish
+        type: boolean
+        default: true
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment: marketplace-publish
+
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Verify tag matches package.json version
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: |
+          TAG_VERSION="${GITHUB_REF#refs/tags/v}"
+          PKG_VERSION="$(node -p "require('./package.json').version")"
+          if [ "$TAG_VERSION" != "$PKG_VERSION" ]; then
+            echo "::error::Tag $TAG_VERSION does not match package.json version $PKG_VERSION"
+            exit 1
+          fi
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: |
+          npm install -g @vscode/vsce
+          npm ci || npm install
+
+      - name: Package
+        run: vsce package --no-git-tag-version --skip-license
+
+      - name: Publish
+        if: ${{ !inputs.dry-run }}
+        run: vsce publish --no-git-tag-version --skip-license --azure-credential

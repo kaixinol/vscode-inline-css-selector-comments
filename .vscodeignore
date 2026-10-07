@@ -4,3 +4,5 @@
 node_modules/**
 .workbuddy/**
 *.vsix
+.github/**
+PUBLISHING.md
