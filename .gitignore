@@ -1,0 +1,3 @@
+.workbuddy/
+*.vsix
+node_modules/

@@ -1,0 +1,46 @@
+{
+  "name": "inline-css-selector-comments",
+  "displayName": "Inline CSS Selector Comments",
+  "description": "Highlight CSS selector comments inside JavaScript and TypeScript string literals.",
+  "version": "0.1.0",
+  "publisher": "kaesinol",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "keywords": [
+    "css",
+    "selector",
+    "comment",
+    "syntax highlighting",
+    "textmate"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kaixinol/vscode-inline-css-selector-comments.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kaixinol/vscode-inline-css-selector-comments/issues"
+  },
+  "homepage": "https://github.com/kaixinol/vscode-inline-css-selector-comments#readme",
+  "contributes": {
+    "grammars": [
+      {
+        "scopeName": "inline.css-selector-comment",
+        "path": "./syntaxes/inline-css-selector-comments.tmLanguage.json",
+        "injectTo": [
+          "source.js",
+          "source.ts",
+          "source.jsx",
+          "source.tsx",
+          "source.vue",
+          "source.svelte",
+          "source.astro"
+        ]
+      }
+    ]
+  }
+}

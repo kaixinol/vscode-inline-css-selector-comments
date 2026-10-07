@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="629" height="48">
+    <foreignObject width="100%" height="100%">
+        <div xmlns="http://www.w3.org/1999/xhtml" style="margin: 0px; padding: 0px; width: 100%; height: 100%; display: inline-block;"><div style="color: #bbbebf;background-color: #121314;font-family:  monospace;font-weight: normal;font-size: 18px;line-height: 24px;white-space: pre;"><div><span style="color: #c9d1d9;">test</span><span style="color: #bbbebf;"> </span><span style="color: #d4d4d4;">=</span><span style="color: #bbbebf;"> </span><span style="color: #8b949e;">/*css-selector*/</span><span style="color: #a5d6ff;"> "div.card &gt; .title </span><span style="color: #8b949e;">/* comment */</span><span style="color: #a5d6ff;">"</span><span style="color: #bbbebf;">;</span></div><br /></div></div>
+    </foreignObject>
+</svg>

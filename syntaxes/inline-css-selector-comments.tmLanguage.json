@@ -1,0 +1,113 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Inline CSS Selector Comments",
+  "scopeName": "inline.css-selector-comment",
+  "injectionSelector": "L:source.js, L:source.ts, L:source.jsx, L:source.tsx",
+  "patterns": [
+    {
+      "include": "#double-quoted"
+    },
+    {
+      "include": "#single-quoted"
+    },
+    {
+      "include": "#template-literal"
+    }
+  ],
+  "repository": {
+    "double-quoted": {
+      "comment": "/* css selector */ \"...\" (double-quoted). Region is scoped as string.quoted.double.js so the content keeps the theme's string color; inner /* */ blocks get comment.block.css from #css-body (deeper in the stack, so the theme prefers the comment color)",
+      "name": "string.quoted.double.js",
+      "begin": "(/\\*\\s*css[ -]selector\\s*\\*/)\\s*(\")",
+      "beginCaptures": {
+        "1": {
+          "name": "comment.block.css"
+        },
+        "2": {
+          "name": "punctuation.definition.string.begin.js"
+        }
+      },
+      "end": "\"",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.js"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#escape"
+        },
+        {
+          "include": "#css-body"
+        }
+      ]
+    },
+    "single-quoted": {
+      "comment": "/* css selector */ '...' (single-quoted)",
+      "name": "string.quoted.single.js",
+      "begin": "(/\\*\\s*css[ -]selector\\s*\\*/)\\s*(')",
+      "beginCaptures": {
+        "1": {
+          "name": "comment.block.css"
+        },
+        "2": {
+          "name": "punctuation.definition.string.begin.js"
+        }
+      },
+      "end": "'",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.js"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#escape"
+        },
+        {
+          "include": "#css-body"
+        }
+      ]
+    },
+    "template-literal": {
+      "comment": "/* css selector */ `...` (template literal)",
+      "name": "string.template.js",
+      "begin": "(/\\*\\s*css[ -]selector\\s*\\*/)\\s*(`)",
+      "beginCaptures": {
+        "1": {
+          "name": "comment.block.css"
+        },
+        "2": {
+          "name": "punctuation.definition.string.template.begin.js"
+        }
+      },
+      "end": "`",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.template.end.js"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#escape"
+        },
+        {
+          "include": "#css-body"
+        }
+      ]
+    },
+    "escape": {
+      "comment": "Consume backslash escapes (\\\" \\' \\` \\\\) so they are not mistaken for the closing quote. Not responsible for coloring.",
+      "match": "\\\\.",
+      "name": "constant.character.escape"
+    },
+    "css-body": {
+      "comment": "Stack comment.block.css onto /* */ inside the string. Deliberately avoids the full source.css / #selector-innards rules (they swallow the closing quote, leaving the string unterminated) and avoids meta.embedded (it strips the string's own color).",
+      "patterns": [
+        {
+          "include": "source.css#comment-block"
+        }
+      ]
+    }
+  }
+}
