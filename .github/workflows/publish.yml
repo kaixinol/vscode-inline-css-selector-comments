@@ -1,13 +1,8 @@
-# Publish the extension to the VS Code Marketplace using Microsoft Entra ID.
-#
-# Azure DevOps global PATs are retired on 2026-12-01, so this workflow
-# authenticates with a federated managed identity instead of a stored secret.
-#
-# One-time setup is documented in PUBLISHING.md. In short you need:
-#   - a user-assigned managed identity in Azure
-#   - a federated credential trusting this repository's workflow
-#   - AZURE_CLIENT_ID / AZURE_TENANT_ID repository secrets
-#   - that identity added as a Contributor on the Marketplace publisher
+# Publishes to the VS Code Marketplace with Microsoft Entra ID, since Azure
+# DevOps global PATs retire on 2026-12-01. Requires a federated managed identity
+# (see the marketplace.visualstudio.com publisher settings), the AZURE_CLIENT_ID
+# and AZURE_TENANT_ID repository secrets, and the AZURE_CLIENT_ID identity added
+# as a Contributor on the publisher.
 
 name: Publish
 
