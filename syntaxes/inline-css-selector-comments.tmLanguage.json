@@ -21,7 +21,7 @@
       "begin": "(/\\*\\s*css[ -]selector\\s*\\*/)\\s*(\")",
       "beginCaptures": {
         "1": {
-          "name": "comment.block.css.inline-selector"
+          "name": "comment.block.css"
         },
         "2": {
           "name": "punctuation.definition.string.begin.js"
@@ -48,7 +48,7 @@
       "begin": "(/\\*\\s*css[ -]selector\\s*\\*/)\\s*(')",
       "beginCaptures": {
         "1": {
-          "name": "comment.block.css.inline-selector"
+          "name": "comment.block.css"
         },
         "2": {
           "name": "punctuation.definition.string.begin.js"
@@ -75,7 +75,7 @@
       "begin": "(/\\*\\s*css[ -]selector\\s*\\*/)\\s*(`)",
       "beginCaptures": {
         "1": {
-          "name": "comment.block.css.inline-selector"
+          "name": "comment.block.css"
         },
         "2": {
           "name": "punctuation.definition.string.template.begin.js"
