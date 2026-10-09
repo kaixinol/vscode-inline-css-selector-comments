@@ -16,7 +16,7 @@
   ],
   "repository": {
     "double-quoted": {
-      "comment": "/* css selector */ \"...\" (double-quoted). Region is scoped as string.quoted.double.js so the content keeps the theme's string color; inner /* */ blocks get comment.block.css from #css-body (deeper in the stack, so the theme prefers the comment color)",
+      "comment": "/* css selector */ \"...\" - region scoped as string.quoted.double.js so the body keeps the theme's string color; inner /* */ gets comment.block.css.inline-selector, which sits deeper in the stack and wins the comment color.",
       "name": "string.quoted.double.js",
       "begin": "(/\\*\\s*css[ -]selector\\s*\\*/)\\s*(\")",
       "beginCaptures": {
@@ -38,12 +38,12 @@
           "include": "#escape"
         },
         {
-          "include": "#css-body"
+          "include": "#inner-comment"
         }
       ]
     },
     "single-quoted": {
-      "comment": "/* css selector */ '...' (single-quoted)",
+      "comment": "/* css selector */ '...' - same as double-quoted, single-quote variant.",
       "name": "string.quoted.single.js",
       "begin": "(/\\*\\s*css[ -]selector\\s*\\*/)\\s*(')",
       "beginCaptures": {
@@ -65,12 +65,12 @@
           "include": "#escape"
         },
         {
-          "include": "#css-body"
+          "include": "#inner-comment"
         }
       ]
     },
     "template-literal": {
-      "comment": "/* css selector */ `...` (template literal)",
+      "comment": "/* css selector */ `...` - template literal variant, scoped as string.template.js.",
       "name": "string.template.js",
       "begin": "(/\\*\\s*css[ -]selector\\s*\\*/)\\s*(`)",
       "beginCaptures": {
@@ -92,24 +92,17 @@
           "include": "#escape"
         },
         {
-          "include": "#css-body"
-        }
-      ]
-    },
-    "escape": {
-      "comment": "Consume backslash escapes (\\\" \\' \\` \\\\) so they are not mistaken for the closing quote. Not responsible for coloring.",
-      "match": "\\\\.",
-      "name": "constant.character.escape"
-    },
-    "css-body": {
-      "comment": "Match /* */ inside the string as a comment. The scope is comment.block.css.inline-selector so it nests under the standard comment scopes (themes keep coloring it like a normal comment) while still being individually overridable via tokenColorCustomizations. Deliberately avoids the full source.css / #selector-innards rules (they swallow the closing quote, leaving the string unterminated) and avoids meta.embedded (it strips the string's own color).",
-      "patterns": [
-        {
           "include": "#inner-comment"
         }
       ]
     },
+    "escape": {
+      "comment": "Consume backslash escapes so they are not mistaken for the closing quote.",
+      "match": "\\\\.",
+      "name": "constant.character.escape"
+    },
     "inner-comment": {
+      "comment": "A /* ... */ block inside the string. Scoped as comment.block.css.inline-selector so it nests under the standard comment scopes (themes color it like a normal comment) while still being overridable via tokenColorCustomizations.",
       "name": "comment.block.css.inline-selector",
       "begin": "/\\*",
       "beginCaptures": {
